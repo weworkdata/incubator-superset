@@ -59,7 +59,8 @@
     >
   </head>
 
-  <body {% if standalone_mode %}class="standalone"{% endif %}>
+  <body {% if standalone_mode %}class="standalone bg-dark"{% endif %} >
+    <!-- NAVBAR -->
     {% block navbar %}
       {% if not standalone_mode %}
         <header class="top" role="header">
