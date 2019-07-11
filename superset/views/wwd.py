@@ -1,3 +1,4 @@
+# pylint: disable=C,R,W
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -14,13 +15,21 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-from . import base  # noqa
-from . import api # noqa
-from . import core  # noqa
-from . import sql_lab  # noqa
-from . import dashboard # noqa
-from . import annotations # noqa
-from . import datasource # noqa
-from . import schedules # noqa
-from . import tags # noqa
-# from . import wwd # noqa
+from flask import g, redirect
+from flask_appbuilder import expose
+from flask_appbuilder.security.decorators import has_access
+
+from superset import appbuilder, db
+from superset.models import core as models
+from .base import BaseSupersetView
+
+
+class WWD(BaseSupersetView):
+    @has_access
+    @expose('/wwd/')
+    def new(self):
+        return self.render_template('superset/base.html')
+
+appbuilder.add_view_no_menu(WWD)
+
+
